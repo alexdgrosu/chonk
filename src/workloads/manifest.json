@@ -1,0 +1,19 @@
+{
+  "metadata": {
+      "runtime": "docker"
+  },
+  "workloads": [
+    {
+      "name": "Devel",
+      "description": "A simple development workload used to troubleshoot CHONK deployment logic",
+      "image": "[missing]",
+      "source": "./devel"
+    },
+    {
+      "name": "Scrape",
+      "description": "A very simple workload that can scrape a website for a specific piece of information",
+      "image": "[missing]",
+      "source": "./scrape"
+    }
+  ]
+}
