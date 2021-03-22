@@ -7,7 +7,7 @@
             "type": "process",
             "args": [
                 "build",
-                "${workspaceFolder}/src/chonk.self/src/Chonk.Web/Chonk.Web.csproj",
+                "${workspaceFolder}/src/chonk.self/Chonk.Self.sln",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],
