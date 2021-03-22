@@ -1,10 +1,11 @@
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Chonk.Services.Models;
 
 namespace Chonk.Services
 {
     public interface IManifestReader
     {
-         IEnumerable<Workload> GetWorkloads();
+         Task<IEnumerable<Workload>> GetWorkloads();
     }
 }

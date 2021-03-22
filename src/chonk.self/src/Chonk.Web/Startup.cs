@@ -1,5 +1,5 @@
 using Chonk.Services;
-using Chonk.Services.Configuration;
+using Chonk.Services.Settings;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -53,8 +53,8 @@ namespace Chonk.Web
 
         public static void AddAppConfiguration(this IServiceCollection services, IConfiguration config)
         {
-            services.Configure<WorkloadsConfiguration>(config.GetSection("Workloads"));
-            services.AddSingleton(resolver => resolver.GetRequiredService<IOptions<WorkloadsConfiguration>>().Value);
+            services.Configure<WorkloadsSettings>(config.GetSection("Workloads"));
+            services.AddSingleton(resolver => resolver.GetRequiredService<IOptions<WorkloadsSettings>>().Value);
         }
     }
 }

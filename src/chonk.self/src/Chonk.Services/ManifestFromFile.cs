@@ -1,32 +1,28 @@
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text.Json;
-using Chonk.Services.Configuration;
+using System.Threading.Tasks;
+using Chonk.Services.Settings;
 using Chonk.Services.Models;
+using Chonk.Services.Extensions;
 
 namespace Chonk.Services
 {
     public class ManifestFromFile : IManifestReader
     {
-        private readonly WorkloadsConfiguration _config;
+        private readonly WorkloadsSettings _settings;
 
-        public ManifestFromFile(WorkloadsConfiguration config)
+        public ManifestFromFile(WorkloadsSettings settings)
         {
-            _config = config;
+            _settings = settings;
         }
-  
-        public IEnumerable<Workload> GetWorkloads()
-        {
-            var jsonString = File.ReadAllText(_config.ManifestPath);
-            
-            // See: https://docs.microsoft.com/en-us/dotnet/standard/serialization/system-text-json-configure-options?pivots=dotnet-5-0
-            var jsonOptions = new JsonSerializerOptions
-            {
-                PropertyNameCaseInsensitive = true
-            };
 
-            var manifest = JsonSerializer.Deserialize<Manifest>(jsonString, jsonOptions);
+        public async Task<IEnumerable<Workload>> GetWorkloads()
+        {
+            using var stream = File.OpenRead(_settings.ManifestSource);
+
+            var manifest = await stream
+                                .FromJsonToAsync<Manifest>()
+                                .ConfigureAwait(false);
 
             return manifest.Workloads;
         }

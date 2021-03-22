@@ -1,6 +1,9 @@
+using System;
 using System.Linq;
+using System.Threading.Tasks;
 using Chonk.Services;
 using Chonk.Services.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Chonk.Web.Controllers
@@ -16,11 +19,16 @@ namespace Chonk.Web.Controllers
         }
 
         [HttpGet]
-        public ActionResult<Workload[]> Get()
+        public async Task<ActionResult<Workload[]>> Get()
         {
-            return _manifestReader
-                .GetWorkloads()
-                ?.ToArray();
+            try
+            {
+                var workloads = await _manifestReader.GetWorkloads();
+                return workloads.ToArray();
+            } catch (Exception x)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, x.Message);
+            }
         }
     }
 }
