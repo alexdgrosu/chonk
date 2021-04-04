@@ -22,7 +22,10 @@ namespace Chonk.Web.Controllers
         public async Task<ActionResult<Workload[]>> Get()
         {
             var manifest = await _manifestReader.Get();
-            return manifest.Workloads.ToArray();
+
+            return (manifest?.Workloads
+                            ?? Enumerable.Empty<Workload>())
+                    .ToArray();
         }
     }
 }
