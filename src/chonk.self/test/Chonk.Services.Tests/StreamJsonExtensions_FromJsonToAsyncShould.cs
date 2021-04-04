@@ -67,7 +67,7 @@ namespace Chonk.Services.Tests
         }
 
         [TestMethod]
-        public async Task FromJsonToAsync_StreamWithCaseSensitiveOptions_ReturnsPocoWithMissinValues()
+        public async Task FromJsonToAsync_StreamWithCaseSensitiveOptions_ReturnsPocoWithMissingValues()
         {
             // Arrange
             const string json = @"{""astring"": ""string""}";
