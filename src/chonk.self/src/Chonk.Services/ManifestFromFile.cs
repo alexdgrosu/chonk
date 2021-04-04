@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 using Chonk.Services.Settings;
@@ -16,7 +15,7 @@ namespace Chonk.Services
             _settings = settings;
         }
 
-        public async Task<IEnumerable<Workload>> GetWorkloads()
+        public async Task<Manifest> Get()
         {
             using var stream = File.OpenRead(_settings.ManifestSource);
 
@@ -24,7 +23,7 @@ namespace Chonk.Services
                                 .FromJsonToAsync<Manifest>()
                                 .ConfigureAwait(false);
 
-            return manifest.Workloads;
+            return manifest;
         }
     }
 }

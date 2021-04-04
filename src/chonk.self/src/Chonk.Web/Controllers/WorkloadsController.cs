@@ -23,8 +23,8 @@ namespace Chonk.Web.Controllers
         {
             try
             {
-                var workloads = await _manifestReader.GetWorkloads();
-                return workloads.ToArray();
+                var manifest = await _manifestReader.Get();
+                return manifest.Workloads.ToArray();
             } catch (Exception x)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, x.Message);
