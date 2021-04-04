@@ -21,14 +21,8 @@ namespace Chonk.Web.Controllers
         [HttpGet]
         public async Task<ActionResult<Workload[]>> Get()
         {
-            try
-            {
-                var manifest = await _manifestReader.Get();
-                return manifest.Workloads.ToArray();
-            } catch (Exception x)
-            {
-                return StatusCode(StatusCodes.Status500InternalServerError, x.Message);
-            }
+            var manifest = await _manifestReader.Get();
+            return manifest.Workloads.ToArray();
         }
     }
 }
